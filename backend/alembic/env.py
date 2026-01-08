@@ -11,9 +11,7 @@ from alembic import context
 sys.path.insert(0, abspath(dirname(dirname(__file__))))
 
 from app.core.config import settings
-from app.db.base_class import Base
-# Importar todos os modelos aqui para o autogenerate funcionar
-# from app.models.user import User
+from app.db.base import Base
 
 config = context.config
 
