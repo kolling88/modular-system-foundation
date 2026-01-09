@@ -8,4 +8,7 @@ python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
 python-dotenv
+pytest
+httpx
+pytest-asyncio
 # zod-pydantic (not found)
