@@ -86,6 +86,14 @@ const LoginPage: React.FC = () => {
               </div>
             </div>
 
+            <div className="flex items-center justify-end">
+              <div className="text-sm">
+                <Link to="/forgot-password" title="Recuperar senha" className="font-medium text-blue-600 hover:text-blue-500">
+                  Esqueceu sua senha?
+                </Link>
+              </div>
+            </div>
+
             <div>
               <button
                 type="submit"
