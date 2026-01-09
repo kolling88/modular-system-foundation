@@ -26,3 +26,14 @@ export interface RoleCreate {
   description?: string;
   permissions?: string;
 }
+
+export interface AuthToken {
+  access_token: string;
+  token_type: string;
+}
+
+export interface AuthState {
+  token: string | null;
+  user: User | null;
+  isAuthenticated: boolean;
+}

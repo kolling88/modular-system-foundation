@@ -13,6 +13,12 @@ router = APIRouter()
 def read_users(db: Session = Depends(get_db), skip: int = 0, limit: int = 100) -> Any:
     return user_service.get_multi(db, skip=skip, limit=limit)
 
+@router.get("/me", response_model=User)
+def read_user_me(
+    current_user: User = Depends(deps.get_current_active_user),
+) -> Any:
+    return current_user
+
 @router.post("/", response_model=User, dependencies=[Depends(deps.get_current_active_superuser)])
 def create_user(user_in: UserCreate, db: Session = Depends(get_db)) -> Any:
     user = user_service.get_by_email(db, email=user_in.email)

@@ -1,12 +1,21 @@
 import React from 'react';
-import { Users, ShieldCheck, LayoutDashboard } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Users, ShieldCheck, LayoutDashboard, LogOut, User as UserIcon } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/useAuthStore';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* Sidebar */}
@@ -28,6 +37,25 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             Perfis de Acesso
           </Link>
         </nav>
+
+        <div className="absolute bottom-0 w-64 p-4 border-t border-gray-100">
+          <div className="flex items-center mb-4 px-2">
+            <div className="bg-blue-100 p-2 rounded-full mr-3">
+              <UserIcon className="w-4 h-4 text-blue-600" />
+            </div>
+            <div className="overflow-hidden">
+              <p className="text-sm font-bold text-gray-900 truncate">{user?.full_name}</p>
+              <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+            </div>
+          </div>
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+          >
+            <LogOut className="w-4 h-4 mr-3" />
+            Sair do Sistema
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}
